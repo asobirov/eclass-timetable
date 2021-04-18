@@ -22,13 +22,15 @@ const Course = ({ fullname }) => {
 
         if (error) {
             setErr(error);
+            console.log('yo');
             if (err) {
+                console.log('yo yo');
                 setErr(null);
                 history.push('/courses');
             }
         }
         setCourse(data);
-    }, [courseState]);
+    }, [courseState, err]);
 
     return (
         <>
