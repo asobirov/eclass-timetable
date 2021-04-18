@@ -71,7 +71,7 @@ const Courses = () => {
                         </li>
                     ))} */}
                 {!!assignments && assignments
-                    .sort((a, b) => a.fullname.localeCompare(b.fullname) )
+                    .sort((a, b) => a.fullname.localeCompare(b.fullname))
                     .map((course, key) => (
                         <li key={key}>
                             <div>
@@ -84,10 +84,10 @@ const Courses = () => {
                                 {forums && forums.map(forum => (forum.course === course.id &&
                                     <li key={forum.cmid} style={{ boxShadow: 'rgb(6 230 147 / 40%) 0px 0px 5px 0px' }}>
                                         {forum.name}
-                                        <span>{
+                                        <span>Time added: {
                                             new Intl.DateTimeFormat('en-GB', {
                                                 year: 'numeric',
-                                                month: 'short',
+                                                month: 'numeric',
                                                 day: 'numeric',
                                                 hour: 'numeric',
                                                 minute: 'numeric',
@@ -100,16 +100,17 @@ const Courses = () => {
                                     if (a.duedate && !(Date.now() >= a.duedate * 1000)) {
                                         return <li key={a.id}>
                                             {a.name}
-                                            <span>{
-                                                new Intl.DateTimeFormat('en-GB', {
-                                                    year: 'numeric',
-                                                    month: 'short',
-                                                    day: 'numeric',
-                                                    hour: 'numeric',
-                                                    minute: 'numeric',
-                                                    timeZone: 'GMT'
-                                                }).format(new Date(a.duedate * 1000))
-                                            }</span>
+                                            <span>
+                                                Deadline: {
+                                                    new Intl.DateTimeFormat('en-GB', {
+                                                        year: 'numeric',
+                                                        month: 'numeric',
+                                                        day: 'numeric',
+                                                        hour: 'numeric',
+                                                        minute: 'numeric',
+                                                        timeZone: 'GMT'
+                                                    }).format(new Date(a.duedate * 1000))
+                                                }</span>
                                         </li>
                                     }
                                 }
