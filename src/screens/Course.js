@@ -2,10 +2,9 @@ import { useParams, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import getAssignments from "../data/getAssignments";
-import { getCourse } from '../redux/courseReducer';
+import { getCourse, getCourseList } from '../redux/courseReducer';
 
-const Course = ({ fullname }) => {
+const Course = () => {
     const { id } = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
@@ -13,28 +12,39 @@ const Course = ({ fullname }) => {
     const [course, setCourse] = useState(null);
     const [err, setErr] = useState(null);
     const courseState = useSelector(state => state.courseReducer.course);
+    const courseListState = useSelector(state => state.courseReducer.courseList);
+    const [courseName, setCourseName] = useState('');
+
     useEffect(() => {
         dispatch(getCourse(id));
+        if (!courseListState) {
+            dispatch(getCourseList());
+        }
     }, [])
 
     useEffect(() => {
         const { data, error } = courseState;
 
-        if (error) {
-            setErr(error);
-            console.log('yo');
-            if (err) {
-                console.log('yo yo');
-                setErr(null);
-                history.push('/courses');
-            }
+        // Bug when insreter wrong ID (have to use the link twice)
+        setErr(error);
+        if (err) {
+            setErr(null);
+            history.push('/courses');
         }
+
         setCourse(data);
     }, [courseState, err]);
+
+    useEffect(() => {
+        if (courseListState && !err) {
+            setCourseName(courseListState.data.filter(course => course.id.toString() === id)[0].fullname);
+        }
+    }, [courseListState]);
 
     return (
         <>
             <div>
+                <h1 dangerouslySetInnerHTML={{ __html: courseName }} />
                 {course && course.map((c, key) => (
                     <div key={key}>
                         {c.name}

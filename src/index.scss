@@ -1,0 +1,341 @@
+@import "./variables";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 18px;
+  line-height: 1;
+  background: $bg-1;
+  color: $color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+a,
+p,
+input,
+label,
+button,
+table,
+td,
+th,
+tr,
+textarea {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+a,
+button {
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  // font-family: $font;
+}
+
+input {
+  font: inherit;
+}
+
+input[type="checkbox"] {
+  border: 1px solid red;
+}
+
+//===== Position =====//
+
+.position {
+  &-fixed {
+    position: fixed;
+  }
+
+  &-absolute {
+    position: absolute;
+  }
+
+  &-relative {
+    position: relative;
+  }
+
+  &-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &-tl {
+    top: 16px;
+    left: 16px;
+  }
+}
+
+//===== Display =====//
+.d-none {
+  display: none !important;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-inline-flex {
+  display: inline-flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-items-start {
+  align-items: flex-start;
+}
+
+.flex-items-center {
+  align-items: center;
+}
+
+.flex-items-end {
+  align-items: flex-end;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-justify-between {
+  justify-content: space-between;
+}
+
+.flex-justify-around {
+  justify-content: space-around;
+}
+
+.flex-justify-start {
+  justify-content: flex-start;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}
+
+//===== Paddings =====//
+
+.container {
+  max-width: 1600px;
+  margin-right: 160px;
+  margin-left: 160px;
+}
+
+@media (max-width: $breakpoint-1) and (min-width: $breakpoint-2) {
+  .container {
+    margin-right: 160px;
+    margin-left: 160px;
+  }
+}
+
+@media (max-width: $breakpoint-2) and (min-width: $breakpoint-3) {
+  .container {
+    margin-right: 75px;
+    margin-left: 75px;
+  }
+}
+
+@media (max-width: $breakpoint-3) and (min-width: $breakpoint-4) {
+  .container {
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: $breakpoint-4) {
+  .container {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+@for $i from 0 through 12 {
+  .pt-#{$i} {
+    @if $i <= 8 {
+      padding-top: $i * 8px;
+    } @else {
+      padding-top: 64 + ($i - 8) * 16px;
+    }
+  }
+  .pr-#{$i} {
+    @if $i <= 8 {
+      padding-right: $i * 8px;
+    } @else {
+      padding-right: 64 + ($i - 8) * 16px;
+    }
+  }
+  .pb-#{$i} {
+    @if $i <= 8 {
+      padding-bottom: $i * 8px;
+    } @else {
+      padding-bottom: 64 + ($i - 8) * 16px;
+    }
+  }
+  .pl-#{$i} {
+    @if $i <= 8 {
+      padding-left: $i * 8px;
+    } @else {
+      padding-left: 64 + ($i - 8) * 16px;
+    }
+  }
+
+  .px-#{$i} {
+    @if $i <= 8 {
+      padding-right: $i * 8px;
+      padding-left: $i * 8px;
+    } @else {
+      padding-right: 64 + ($i - 8) * 16px;
+      padding-left: 64 + ($i - 8) * 16px;
+    }
+  }
+  .py-#{$i} {
+    @if $i <= 8 {
+      padding-top: $i * 8px;
+      padding-bottom: $i * 8px;
+    } @else {
+      padding-top: 64 + ($i - 8) * 16px;
+      padding-bottom: 64 + ($i - 8) * 16px;
+    }
+  }
+
+  .p-#{$i} {
+    @if $i <= 8 {
+      padding: $i * 8px;
+    } @else {
+      padding: 64 + ($i - 8) * 16px;
+    }
+  }
+
+  //===== Margins =====//
+
+  .mt-#{$i} {
+    @if $i <= 8 {
+      margin-top: $i * 8px;
+    } @else {
+      margin-top: 64 + ($i - 8) * 16px;
+    }
+  }
+  .mr-#{$i} {
+    @if $i <= 8 {
+      margin-right: $i * 8px;
+    } @else {
+      margin-right: 64 + ($i - 8) * 16px;
+    }
+  }
+  .mb-#{$i} {
+    @if $i <= 8 {
+      margin-bottom: $i * 8px;
+    } @else {
+      margin-bottom: 64 + ($i - 8) * 16px;
+    }
+  }
+  .ml-#{$i} {
+    @if $i <= 8 {
+      margin-left: $i * 8px;
+    } @else {
+      margin-left: 64 + ($i - 8) * 16px;
+    }
+  }
+
+  .mx-#{$i} {
+    @if $i <= 8 {
+      margin-right: $i * 8px;
+      margin-left: $i * 8px;
+    } @else {
+      margin-right: 64 + ($i - 8) * 16px;
+      margin-left: 64 + ($i - 8) * 16px;
+    }
+  }
+  .my-#{$i} {
+    @if $i <= 8 {
+      margin-top: $i * 8px;
+      margin-bottom: $i * 8px;
+    } @else {
+      margin-top: 64 + ($i - 8) * 16px;
+      margin-bottom: 64 + ($i - 8) * 16px;
+    }
+  }
+
+  .m-#{$i} {
+    @if $i <= 8 {
+      margin: $i * 8px;
+    } @else {
+      margin: 64 + ($i - 8) * 16px;
+    }
+  }
+}
+
+//===== Width =====//
+
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+//===== Border Radius =====//
+
+.br-5px {
+  border-radius: 5px;
+}
+
+.br-3px {
+  border-radius: 3px;
+}
+
+//===== Background =====//
+
+//===== Color =====//
+
+//===== Box Shadow =====//
+
+//===== Font Templates =====//
+
+//===== Custom Styles =====//
