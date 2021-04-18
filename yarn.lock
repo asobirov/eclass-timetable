@@ -11968,6 +11968,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-app@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "react-app@npm:1.1.2"
+  bin:
+    react-app: ./bin/react-app.js
+  checksum: 38106570973f035ad1f25e0027fc0b5ec19d71bf9a713d9a2ed14a25b0d44f880443dcbd1ed742d0f138f2bc7416617c70095e9cce005dc8d33abffd62ba1ca3
+  languageName: node
+  linkType: hard
+
 "react-dev-utils@npm:^11.0.3":
   version: 11.0.4
   resolution: "react-dev-utils@npm:11.0.4"
@@ -14061,7 +14070,9 @@ resolve@^2.0.0-next.3:
   resolution: "timetable@workspace:."
   dependencies:
     cra-template: 1.1.2
+    eslint-config-react-app: ^6.0.0
     react: ^17.0.2
+    react-app: ^1.1.2
     react-dom: ^17.0.2
     react-router-dom: ^5.2.0
     react-scripts: 4.0.3
