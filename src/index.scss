@@ -349,7 +349,11 @@ input[type="checkbox"] {
 }
 
 .shadow-green{
-  box-shadow:  0 0 5px 0 rgba(6, 230, 147, 40%);
+  box-shadow:  0 0 5px 0 rgba(6, 230, 147, 0.4);
+}
+
+.shadow-dark-blue{
+  box-shadow: 0 0 5px 0 rgba(0, 50, 143, 0.4) ;
 }
 
 //===== Font Templates =====//

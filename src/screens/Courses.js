@@ -95,7 +95,7 @@ const Courses = ({ className, ...rest }) => {
 
                             <ul>
                                 {forums && forums.map(forum => (forum.course === course.id &&
-                                    <li key={forum.cmid} style={{ boxShadow: 'rgb(6 230 147 / 40%) 0px 0px 5px 0px' }}>
+                                    <li key={forum.cmid} className='shadow-dark-blue'>
                                         {forum.name}
                                         <span>Time added: {
                                             new Intl.DateTimeFormat('en-GB', {
