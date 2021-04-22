@@ -1,4 +1,4 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -25,7 +25,7 @@ const Course = () => {
     useEffect(() => {
         const { data, error } = courseState;
 
-        // Bug when insreter wrong ID (have to use the link twice)
+        // Bug when inserted wrong ID (have to use the link twice)
         setErr(error);
         if (err) {
             setErr(null);
@@ -33,6 +33,7 @@ const Course = () => {
         }
 
         setCourse(data);
+        console.log(data);
     }, [courseState, err]);
 
     useEffect(() => {
@@ -45,11 +46,17 @@ const Course = () => {
         <>
             <div>
                 <h1 dangerouslySetInnerHTML={{ __html: courseName }} />
-                {course && course.map((c, key) => (
-                    <div key={key}>
+                {course && course.slice(1).map((c, key) => (
+                    <div key={key} className='mt-4'>
                         {c.name}
+                        <div className='course-modules'>
+                            {c.modules && c.modules.map(mod => (
+                                <a target="_blank" href={mod.url} key={mod.id}>{mod.name}</a>
+                            ))}
+                        </div>
                     </div>
                 ))}
+
             </div>
         </>
     )

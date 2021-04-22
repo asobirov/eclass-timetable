@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCourseList, getAssignments, getForums } from '../redux/courseReducer';
 
-const Courses = () => {
+const Courses = ({ className, ...rest }) => {
     const dispatch = useDispatch();
     const [courseList, setCourseList] = useState(null);
     const [assignments, setAssignments] = useState(null);
@@ -13,6 +13,8 @@ const Courses = () => {
     const courseListState = useSelector(state => state.courseReducer.courseList);
     const courseAssignmentsState = useSelector(state => state.courseReducer.assignments);
     const forumsState = useSelector(state => state.courseReducer.forums);
+
+    const oneDay = 24 * 60 * 60 * 1000;
 
     useEffect(() => {
         dispatch(getCourseList());
@@ -56,8 +58,19 @@ const Courses = () => {
         }
     }, [forumsState]);
 
+    const getShadowByTime = (time) => {
+        if (Math.abs(time * 1000 - Date.now()) < 2 * oneDay) {
+            if (Math.abs(time * 1000 - Date.now()) < 1 * oneDay) {
+                return 'shadow-red';
+            }
+            return 'shadow-yellow'
+        }
+
+        return 'shadow';
+    }
+
     return (
-        <div>
+        <div className={className ? className : ''}>
             <ul className='list'>
                 <h3>
                     Courses - {!!courseList && courseList.length}
@@ -91,34 +104,38 @@ const Courses = () => {
                                                 day: 'numeric',
                                                 hour: 'numeric',
                                                 minute: 'numeric',
-                                                timeZone: 'GMT'
-                                            }).format(new Date(forum.timemodified * 1000))
+                                            }).format(new Date(forum.timemodified * 1000 - 1))
                                         }</span>
                                     </li>
                                 ))}
-                                {course.assignments.map(a => {
+                                <span className='ml-1'></span>
+                                {course.assignments.sort((a, b) => a.duedate - b.duedate).map(a => {
                                     if (a.duedate && !(Date.now() >= a.duedate * 1000)) {
-                                        return <li key={a.id}>
-                                            {a.name}
-                                            <span>
-                                                Deadline: {
-                                                    new Intl.DateTimeFormat('en-GB', {
-                                                        year: 'numeric',
-                                                        month: 'numeric',
-                                                        day: 'numeric',
-                                                        hour: 'numeric',
-                                                        minute: 'numeric',
-                                                        timeZone: 'GMT'
-                                                    }).format(new Date(a.duedate * 1000))
-                                                }</span>
-                                        </li>
+                                        return (
+                                            <li
+                                                key={a.id}
+                                                className={getShadowByTime(a.duedate)}>
+                                                { a.name}
+                                                <span span >
+                                                    Deadline : {
+                                                        new Intl.DateTimeFormat('en-GB', {
+                                                            year: 'numeric',
+                                                            month: 'numeric',
+                                                            day: 'numeric',
+                                                            hour: 'numeric',
+                                                            minute: 'numeric',
+                                                        }).format(new Date(a.duedate * 1000 - 1))
+                                                    }
+                                                </span>
+                                            </li>
+                                        )
                                     }
-                                }
-                                )}
+                                })}
                             </ul>
                         </li>
-                    ))}
-            </ul>
+                    ))
+                }
+            </ul >
         </div >
     );
 }

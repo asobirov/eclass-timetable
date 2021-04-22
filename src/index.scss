@@ -336,6 +336,22 @@ input[type="checkbox"] {
 
 //===== Box Shadow =====//
 
+.shadow{
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+}
+
+.shadow-red{
+  box-shadow: 0 0 5px 0 rgba(186, 64, 64, 0.4);
+}
+
+.shadow-yellow{
+  box-shadow: 0 0 5px 0 rgba(184, 212, 55, 0.4);
+}
+
+.shadow-green{
+  box-shadow:  0 0 5px 0 rgba(6, 230, 147, 40%);
+}
+
 //===== Font Templates =====//
 
 //===== Custom Styles =====//
