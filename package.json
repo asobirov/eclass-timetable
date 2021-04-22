@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "yarn set version berry && react-scripts build",
+    "build": "babel src -d lib",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
